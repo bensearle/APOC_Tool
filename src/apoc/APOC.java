@@ -71,16 +71,6 @@ public class APOC {
         new APOC().initialize();
     }
 
-    public void t() {
-        int i = 4;
-        while (i > 0) {
-            String g = "B";
-            g = g + i;
-            System.out.println(g);
-            i--;
-        }
-    }
-
     public static String[] getFileNames(String directoryPath) {
         File dir = new File(directoryPath);
         Collection<String> files = new ArrayList<String>();
@@ -150,21 +140,12 @@ public class APOC {
                 filepath = path;
             }
         }
-
-        // modify JFrame to tell them the program has executed allow them to close the JFrame
-       /* JButton button = new JButton("click to close");
-         button.addActionListener(new ActionListener() {
-         public void actionPerformed(ActionEvent evt) {
-         frame.dispose();
-         }
-         });
-         label.setText("mapping register created C:\\APOC_Tool\\output\\");
-         panel.add(button);*/
         frame.dispose();
     }
 
-    /*
-     * method 
+    /**
+     * go into a folder in the input folder
+     * @param folderName 
      */
     public void inFolder(String folderName) {
         filepath = path + folderName + "\\";
@@ -188,6 +169,11 @@ public class APOC {
         }
     }
 
+    /**
+     * add devices from the given line in the text file
+     * @param fileName
+     * @param fileLine 
+     */
     public void readTxtLine(String fileName, String fileLine) {
         // separate fileLine by comma in to a list of strings 
         String[] parts = fileLine.split("\\;");
@@ -292,6 +278,10 @@ public class APOC {
         }
     }
 
+    /**
+     * read the text file, calling readTxtLine() for every line
+     * @param fileName 
+     */
     public void readTxtFile(String fileName) {
         BufferedReader br = null;
         File file = new File(filepath, fileName);
@@ -325,85 +315,12 @@ public class APOC {
         }
     }
 
-    public void readXmlElement(Document d, String fileName, String element) {
-        NodeList list = d.getElementsByTagName(element);
-        int count = list.getLength(); // count how many
-
-        while (count > 0) {
-            d.getDocumentElement().normalize();
-            Node node = list.item(count - 1); // use the count to get position of node
-            Element e = (Element) node; // get node element
-            //String name = e.getAttribute("product_code");
-
-            // uniqueIdentifier calculated at the end
-            // area is set with the name of the folder 
-            attribute = e.getAttribute("product_code");
-            type = csvLookup("attribute_type", attribute, 2);
-            label = e.getAttribute("label");
-            opcInterfacePc = "";
-            opcServerName = "";
-            opcTag = "";
-
-            identifierArea = csvLookup("unique_identifier_area", area, 2);
-            identifierNode = "" + fileName.charAt(fileName.length() - 7) + fileName.charAt(fileName.length() - 6) + fileName.charAt(fileName.length() - 5);
-            identifierLoop = e.getAttribute("loop_number");
-            identifierDevice = threeDigit(e.getAttribute("loop_position"));
-            identifierType = csvLookup("attribute_type", attribute, 3);
-            identifierChannel = "";
-
-            // make changes for special cases
-            if (element == "fire_loop_device") {
-                // no changes needed for fire loop
-            } else if (element == "addressable_speaker") {
-                // addressable_speakers identifierLoop to equal identifierLoop + 2
-                switch (identifierLoop) {
-                    case "1":
-                        identifierLoop = "3";
-                    case "2":
-                        identifierLoop = "4";
-                    default:
-                }
-                identifierDevice = threeDigit(e.getAttribute("address"));
-            } else if (element == "microphone") {
-                // microphones identifierLoop to equal 5
-                identifierLoop = "5";
-                identifierChannel = e.getAttribute("annunciation_input_channel");
-            } else if (element == "serial_device") {
-                // serial_devices identifierLoop to equal 5
-                identifierLoop = "5";
-            }
-
-            // create identifier tag
-            if (identifierChannel.length() == 0) {
-                uniqueIdentifier = identifierArea + "-" + identifierNode + "-" + identifierLoop + "-" + identifierDevice + "-" + identifierType;
-            } else {
-                uniqueIdentifier = identifierArea + "-" + identifierNode + "-" + identifierLoop + "-" + identifierDevice + "-" + identifierType + "-" + identifierChannel;
-            }
-
-            // print the fileLine - testing
-            // System.out.println(parts[0] + ", " + parts[1] + ", " + parts[2] + ", " + parts[3] + ", " + parts[4] + ", " + parts[5] + ", ");
-            System.out.println("*** " + fileName + " *** " + uniqueIdentifier + ", "
-                    + area + ", , "
-                    + attribute + ", "
-                    + type + ", "
-                    + label + ", "
-                    + ", , , " 
-            );
-            output.println(uniqueIdentifier + ","
-                    + area + ",,"
-                    + attribute + ","
-                    + type + ","
-                    + label + ","
-                    + ",,," 
-            );
-            
-            resetVariables();
-
-            count--; // decrement count
-            //       System.out.println(name);
-        }
-    }
-
+    /**
+     * add devices from the given element in the xml file
+     * @param d
+     * @param fileName
+     * @param element 
+     */
     public void getXMLDevices(Document d, String fileName, String element) {
         NodeList deviceList = d.getElementsByTagName(element);
         int deviceCount = deviceList.getLength(); // count how many
@@ -479,18 +396,8 @@ public class APOC {
                     + ",," // channel type
             );
 
-            /*  NodeList interfaceUnitList = device.getElementsByTagName("channel"); // get all elements
-             // NodeList channelList = deviceNode.getChildNodes(); // get the child elements
-             int interfaceUnitCount = interfaceUnitList.getLength(); // count how many - should always be 1
-             Node interfaceUnitNode = interfaceUnitList.item(0); // use the count to get position of node
-             Element interfaceUnit = (Element) interfaceUnitNode; // get node element
-            
-             NodeList channelList = interfaceUnit.getElementsByTagName("*"); // get all elements
-             // NodeList channelList = deviceNode.getChildNodes(); // get the child elements
-             int channelCount = channelList.getLength(); // count how many
-             System.out.println(device_id_string + "  " + channelCount);*/
+
             NodeList channelList = device.getElementsByTagName("channel"); // get all elements
-            // NodeList channelList = deviceNode.getChildNodes(); // get the child elements
             int channelCount = channelList.getLength(); // count how many
             System.out.println(device_id_string + "  " + channelCount);
 
@@ -512,20 +419,9 @@ public class APOC {
                     String device_uniqueIdentifier_channel = device_identifierArea + "-" + device_identifierNode + "-" + device_identifierLoop + "-" + device_identifierDevice + "-INI-" + device_identifierChannel;
 
                     device_label = channel.getAttribute("channel_label");
-
                     String channel_type = channel.getAttribute("channel_type");
-
                     String channel_type_string = ioName;
 
-                   //System.out.println("***values id-" + channel.getAttribute("channel_id") + " label-" + channel.getAttribute("channel_label") + " type-" + channel.getAttribute("channel_type"));
-                //d.getDocumentElement().normalize();
-                    //Node channelNode = (Node) channelList.item(deviceCount - 1); // use the count to get position of node
-                    //Element channel = (Element) channelNode; // get node element
-                    //String st = channelNode.getNodeName();
-                    //
-                    //NodeList channelList = device.getElementsByTagName("*");
-                    //int channelCount = channelList.getLength(); // count how many
-                    //String evac_fire_loop_device_ref = channel.getAttribute("id_string");
                     System.out.println("** " + device_uniqueIdentifier_channel + ", "
                             + area + ", "
                             + device_id_string + ", "
@@ -550,14 +446,17 @@ public class APOC {
                     );
                 }
                 channelCount--; // decrement count
-
             }
-
             deviceCount--; // decrement count
         }
         output_devices.flush();
     }
 
+    /**
+     * look at the xml file for "evac_zone" and create and evac zone lookup
+     * @param d
+     * @param filename 
+     */
     public void getXMLEvacZones(Document d, String filename) {
         NodeList evacList = d.getElementsByTagName("evac_zone");
         int evacCount = evacList.getLength(); // count how many
@@ -597,9 +496,6 @@ public class APOC {
         File file = new File(filepath, fileName);
         if (file.exists()) {
             try {
-                // String filepath = "C:\\Users\\bsearle\\Documents\\APOC\\JavaInput\\";
-                //String fileName = "15000 FAS_PAN00055.xml";
-                // File file = new File(filepath, fileName);
                 InputStream in;
                 in = new FileInputStream(file);
                 if (in.available() > 0) { // if the .xml is more than 0 bytes
@@ -610,10 +506,6 @@ public class APOC {
                     getXMLDevices(d, fileName, "addressable_speaker");
                     getXMLDevices(d, fileName, "serial_device");
                     getXMLDevices(d, fileName, "microphone");
-                    //readXmlElement(d, fileName, "fire_loop_device");
-                    //readXmlElement(d, fileName, "addressable_speaker");
-                    //readXmlElement(d, fileName, "serial_device");
-                    //readXmlElement(d, fileName, "microphone");
                 }
             } catch (Exception e) {
                 System.out.println("Error0: " + e);
@@ -624,7 +516,7 @@ public class APOC {
         }
     }
 
-    /*
+    /**
      * method to search type.csv for type number and return type name
      */
     public String evacZoneLookup(String filename, String id) {
@@ -638,7 +530,7 @@ public class APOC {
                 // if the file and evac_zone_id equal
                 if (columns[0].trim().equalsIgnoreCase(filename) && columns[1].trim().equalsIgnoreCase(id)) {
 
-                    // return 2 id_string, 3 label, 4 reception_point_name, 5 site_entry_point_label
+                    // return: 2 id_string, 3 label, 4 reception_point_name, 5 site_entry_point_label
                     String returnString = columns[2] + ", " + columns[3] + ", " + columns[4] + ", " + columns[5];
 
                     return returnString;
@@ -664,7 +556,7 @@ public class APOC {
         return "na,na,na,na";
     }
 
-    /*
+    /**
      * method to search type.csv for type number and return type name
      */
     public String csvLookup(String columnZero, String columnOne, int columnLookup) {
@@ -713,7 +605,13 @@ public class APOC {
             return "(check lookup.csv for \"" + columnZero + " " + columnOne + "\")";
         }
     }
-
+    
+    /**
+     * turn input into a 3 digit number: 1 --> 001
+     * return XXX if input is more than 3 digits
+     * @param number
+     * @return threeDigitNo
+     */
     public String threeDigit(String number) {
         String threeDigitNo = "XXX";
         int length = String.valueOf(number).length();
@@ -727,9 +625,12 @@ public class APOC {
         return threeDigitNo;
     }
 
+    /**
+     * reset all the variables that are used for creating output from text file
+     */
     public void resetVariables() {
         uniqueIdentifier = "";
-        //area = "";
+        //area = ""; // do not reset area as this is linked to the file, not the line
         attribute = "";
         type = "";
         label = "";
