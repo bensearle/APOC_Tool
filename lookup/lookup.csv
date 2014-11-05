@@ -1,0 +1,171 @@
+attribute_type,300910006,Beam Receiver,BRX
+attribute_type,300930006,Beam Receiver,BRX
+attribute_type,300910007,Beam Transmitter,BTX
+attribute_type,300930007,Beam Transmitter,BTX
+attribute_type,300910005,Distributed Amplifier Unit,DAU
+attribute_type,300930005,Distributed Amplifier Unit,DAU
+attribute_type,300930041,Dual Angle Optical / Heat Sensor,SEN
+attribute_type,300930048,Dual Angle Optical / Heat Sensor Sounder,SES
+attribute_type,300930049,Dual Angle Optical / Heat Sensor Speech,SE3
+attribute_type,300930042,Dual Angle Optical / Heat Sensor Strobe,STR
+attribute_type,300930050,Dual Angle Optical / Heat Sensor Strobe & Speech,SE3
+attribute_type,300930055,Dual Angle Optical / Heat Sensor with CO,SEN
+attribute_type,VA-1521,GENT - Orator  Voice DAU [ GentOrator 400-DAU ],DAU
+attribute_type,34800,GENT Call Point [ IP40 ],MCP
+attribute_type,34800-EN,GENT Call Point [ IP40 ],MCP
+attribute_type,34852-EN,GENT Call Point [ IP55 With Cover ],MCP
+attribute_type,13421-51-DC,GENT Column Loudspeaker [ 20 watt ],LSP
+attribute_type,13421-52-DC,GENT Column Loudspeaker [ 40 watt ],LSP
+attribute_type,34760,GENT Duct Smoke Detector [ 145 x 165 ],
+attribute_type,AS-1181,GENT Genisys Fire Alarm Access Node [ FAAN ],PAN
+attribute_type,AS-118B,GENT Genisys Fire Alarm Access Node [ FAAN ],PAN
+attribute_type,S4-711,GENT Genisys S-Quad Sensor & Sounder [ Dual Optical/Heat ],SES
+attribute_type,S4-720,GENT Genisys S-Quad Sensor & Sounder [ Heat Sensor ],SES
+attribute_type,S4-771,GENT Genisys S-Quad Sensor & Sounder [ Optical Heat Sensor/Sounder ],SES
+attribute_type,AS-1771,GENT Interface Unit [ Loop ],INF
+attribute_type,AS-1771-4E2,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4G3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4G4,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4E1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4F1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4X5,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4H1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4E3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4D1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4E5,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4X4,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4G2,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4F7,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4F3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4F8,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4F9,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4H5,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4E4,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4H3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4H2,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4D3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4M1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4S1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4C2,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4X6,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4Q3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4H4,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4N1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4G1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4F5,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4F6,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4F4,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4X1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4S3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4J2,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4J3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4Q7,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4W1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4H7,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4X7,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4S4,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4S6,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4T2,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4T1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4R1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4R3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4R2,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4S5,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4X3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4X2,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4K4,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4K2,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4P4,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4P5,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4K3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4P7,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4P3,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4T5,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4P6,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,AS-1771-4P1,GENT Interface Unit [ Loop ]-Input,INI
+attribute_type,34415,GENT Interface Unit [ Single Channel ],INF
+attribute_type,34415-1A8,GENT Interface Unit [ Single Channel ],INI
+attribute_type,S3IP-SN-ST-WR,Terminal 5A,SOS
+attribute_type,S2IP-ST-WR,GENT S3 Alarm Devices (Strobe) [ IP65 Stobe ],STR
+attribute_type,S3IP-SN-W,GENT S3 Alarm Devices [ IP65 Sounder ],SOU
+attribute_type,300910016,Heat Sensor,SEN
+attribute_type,300930016,Heat Sensor,SES
+attribute_type,300930036,Heat Sensor & MI,SEN
+attribute_type,300910017,Heat Sensor & Sounder,SES
+attribute_type,300930017,Heat Sensor Sounder,SOS
+attribute_type,300930037,Heat Sensor Strobe & Speech,SE3
+attribute_type,300910026,Heat Sensor with Slave LED,SES
+attribute_type,300930026,Heat Sensor with Slave LED,SEN
+attribute_type,ILD9,ILD9 Induction Loop,IDL
+attribute_type,300910009,Interface,INF
+attribute_type,300930009,Interface,INF
+attribute_type,300920002,Interface - Input,INI
+attribute_type,300920003,Interface - Output,INO
+attribute_type,300930018,Ionisation Sensor,SES
+attribute_type,300930028,Ionisation Sensor with Slave LED,SEN
+attribute_type,300910003,Manual Call Point,MCP
+attribute_type,300930003,Manual Call Point,MCP
+attribute_type,MARSHALL,Marshalling Box,
+attribute_type,A0571001,Multizone Vandal Resistant Mic Station (24 Button),
+attribute_type,300900091,Node (Fire Panel),PAN
+attribute_type,300900092,Node (Fire Panel),PAN
+attribute_type,300930040,Optical / Heat Sensor,SEN
+attribute_type,34710,Optical Heat Sensor,SEN
+attribute_type,300910020,Optical Sensor,SEN
+attribute_type,300930020,Optical Sensor,SES
+attribute_type,300910021,Optical Sensor & Sounder,SES
+attribute_type,300930021,Optical Sensor & Sounder,SES
+attribute_type,300930032,Optical Sensor & Sounder with Slave LED,SES
+attribute_type,300930014,Optical Sensor with Slave LED,SEN
+attribute_type,13421-108,Penton Bi-Directional Cabinet Speaker [ 6watt ],LSP
+attribute_type,13421-106,Penton Cabinet Speaker [ 6/STC ],LSP
+attribute_type,13421-21-DC,Penton Cabinet Speaker [ 6/STC-C ],LSP
+attribute_type,13421-101,Penton Ceiling Mounted Loudspeaker [ RCS 6/FT COAX ],LSP
+attribute_type,13421-14-DC,Penton Ceiling Mounted Loudspeaker [ RCS 6/FTS ],LSP
+attribute_type,13421-16-DC,Penton Ceiling Mounted Loudspeaker [ RCS 6/FTS COAX C ],LSP
+attribute_type,300910013,Repeater Panel,RPT
+attribute_type,300930010,Repeater Panel,RPT
+attribute_type,300930013,Repeater Panel,RPT
+attribute_type,300910002,Sensor,SEN
+attribute_type,300930002,Sensor,SEN
+attribute_type,300910011,Sounder,SOU
+attribute_type,300930011,Sounder,SOU
+attribute_type,300930070,Sounder with Strobe,SOS
+attribute_type,300930071,Sounder with Strobe & Speech,SO3
+attribute_type,300930072,Strobe,STR
+attribute_type,300910025,Strobe & Speech,STS
+attribute_type,A0571000,Vandal Resistant Mic Station (4 Button),
+attribute_type,300930023,Voice Sounder,SOU
+attribute_type,300930025,Voice Sounder with Strobe,SOS
+attribute_type,13421-43-DC,Wall Mounted Penton Heavy Duty Re-Entrant Horn [ 20watt ],
+unique_identifier_area,D’Albiac House,DAL,
+unique_identifier_area,D'Albiac House,DAL,
+unique_identifier_area,Multi-Storey Car Park Terminal 5,CP5,
+unique_identifier_area,Passenger Subways,PAX,
+unique_identifier_area,Terminal 1,T01,
+unique_identifier_area,Terminal 3,T03,
+unique_identifier_area,Terminal 3 Integrated Baggage,T3B,
+unique_identifier_area,Terminal 4,T04,
+unique_identifier_area,Terminal 5A,T5A,
+unique_identifier_area,Terminal 5B,T5B,
+unique_identifier_area,Terminal 5C,T5C,
+unique_identifier_area,Track Transit System Terminal 5,TTS,
+unique_identifier_area,Utilities System Terminal 5,UTL,
+unique_identifier_area,Western Interface Building,WIB,
+attribute_xml_area,LHRVM300110,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300112,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300113,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300114,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300115,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300116,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300118,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300120,Terminal 5B,<--unchecked area
+attribute_xml_area,LHRVM300122,Terminal 5B,<--unchecked area
+attribute_xml_area,LHRVM300124,Terminal 5B,<--unchecked area
+attribute_xml_area,LHRVM300126,Terminal 5ABC,<--unkown area
+attribute_xml_area,LHRVM300128,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300146,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300148,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300158,Terminal 5A,<--unchecked area
+attribute_xml_area,LHRVM300182,Terminal 5C,<--unchecked area
+attribute_xml_area,LHRVM300183,Terminal 5C,<--unchecked area
