@@ -6,8 +6,8 @@ attribute_type,300910005,Distributed Amplifier Unit,DAU
 attribute_type,300930005,Distributed Amplifier Unit,DAU
 attribute_type,300930041,Dual Angle Optical / Heat Sensor,SEN
 attribute_type,300930048,Dual Angle Optical / Heat Sensor Sounder,SES
-attribute_type,300930049,Dual Angle Optical / Heat Sensor Speech,SES
-attribute_type,300930042,Dual Angle Optical / Heat Sensor Strobe,SST
+attribute_type,300930049,Dual Angle Optical / Heat Sensor Speech,SE3
+attribute_type,300930042,Dual Angle Optical / Heat Sensor Strobe,STR
 attribute_type,300930050,Dual Angle Optical / Heat Sensor Strobe & Speech,SE3
 attribute_type,300930055,Dual Angle Optical / Heat Sensor with CO,SEN
 attribute_type,VA-1521,GENT - Orator  Voice DAU [ GentOrator 400-DAU ],DAU
@@ -89,30 +89,30 @@ attribute_type,S3IP-SN-ST-WR,Terminal 5A,SOS
 attribute_type,S2IP-ST-WR,GENT S3 Alarm Devices (Strobe) [ IP65 Stobe ],STR
 attribute_type,S3IP-SN-W,GENT S3 Alarm Devices [ IP65 Sounder ],SOU
 attribute_type,300910016,Heat Sensor,SEN
-attribute_type,300930016,Heat Sensor,SEN
+attribute_type,300930016,Heat Sensor,SES
 attribute_type,300930036,Heat Sensor & MI,SEN
 attribute_type,300910017,Heat Sensor & Sounder,SES
-attribute_type,300930017,Heat Sensor Sounder,SES
+attribute_type,300930017,Heat Sensor Sounder,SOS
 attribute_type,300930037,Heat Sensor Strobe & Speech,SE3
-attribute_type,300910026,Heat Sensor with Slave LED,SEN
+attribute_type,300910026,Heat Sensor with Slave LED,SES
 attribute_type,300930026,Heat Sensor with Slave LED,SEN
 attribute_type,ILD9,ILD9 Induction Loop,IDL
 attribute_type,300910009,Interface,INF
 attribute_type,300930009,Interface,INF
 attribute_type,300920002,Interface - Input,INI
 attribute_type,300920003,Interface - Output,INO
-attribute_type,300930018,Ionisation Sensor,SEN
+attribute_type,300930018,Ionisation Sensor,SES
 attribute_type,300930028,Ionisation Sensor with Slave LED,SEN
 attribute_type,300910003,Manual Call Point,MCP
 attribute_type,300930003,Manual Call Point,MCP
 attribute_type,MARSHALL,Marshalling Box,
-attribute_type,A0571001,Multizone Vandal Resistant Mic Station (24 Button),MIC
+attribute_type,A0571001,Multizone Vandal Resistant Mic Station (24 Button),
 attribute_type,300900091,Node (Fire Panel),PAN
 attribute_type,300900092,Node (Fire Panel),PAN
 attribute_type,300930040,Optical / Heat Sensor,SEN
 attribute_type,34710,Optical Heat Sensor,SEN
 attribute_type,300910020,Optical Sensor,SEN
-attribute_type,300930020,Optical Sensor,SEN
+attribute_type,300930020,Optical Sensor,SES
 attribute_type,300910021,Optical Sensor & Sounder,SES
 attribute_type,300930021,Optical Sensor & Sounder,SES
 attribute_type,300930032,Optical Sensor & Sounder with Slave LED,SES
@@ -133,8 +133,8 @@ attribute_type,300930011,Sounder,SOU
 attribute_type,300930070,Sounder with Strobe,SOS
 attribute_type,300930071,Sounder with Strobe & Speech,SO3
 attribute_type,300930072,Strobe,STR
-attribute_type,300910025,Strobe & Speech,SO3
-attribute_type,A0571000,Vandal Resistant Mic Station (4 Button),MIC
+attribute_type,300910025,Strobe & Speech,STS
+attribute_type,A0571000,Vandal Resistant Mic Station (4 Button),
 attribute_type,300930023,Voice Sounder,SOU
 attribute_type,300930025,Voice Sounder with Strobe,SOS
 attribute_type,13421-43-DC,Wall Mounted Penton Heavy Duty Re-Entrant Horn [ 20watt ],
