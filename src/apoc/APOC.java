@@ -110,13 +110,13 @@ public class APOC {
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HHmm");
         Date now = new Date();
         String strDate = sdfDate.format(now);
-        output = new PrintWriter("C:\\APOC_Tool\\OUTPUT\\" + strDate + " devices_txt.csv"); // create .csv for the devices, for txt files
+        output = new PrintWriter("C:\\APOC_Tool\\OUTPUT\\" + strDate + " devices_txt.txt"); // create .txt for the devices, for txt files
         evac_zone_lookup_location = "C:\\APOC_Tool\\OUTPUT\\" + strDate + " evac_zones_xml.csv";
         output_evac_zone = new PrintWriter(evac_zone_lookup_location); // create .csv for evac zones, used as lookup
         output_devices = new PrintWriter("C:\\APOC_Tool\\OUTPUT\\" + strDate + " devices_xml.csv"); // create .csv for the devices, for xml files
 
-        // add headings to the .csv
-        output.println("Unique Identifier,Area,Attribute,Type,Label,OPC Interface PC,OPC Server Name,OPC Tag");
+        // add headings to the .csv and .txt
+        output.println("Unique Identifier	Area	Attribute	Type	Label	OPC Interface PC	OPC Server Name	OPC Tag"); // header of tab delimited file 
         output_evac_zone.println("filename,id,id_string,label,reception_point_name,site_entry_point_label"); // header of .csv
         output_devices.println("Unique Identifier,Area,id_string,Attribute,Type,Label,evac_zone_id,evac_id_string,evac_label,evac_reception_point_name,evac_site_entry_point_label,channel_type,channel_type_string"); // header of .csv
 
@@ -231,11 +231,11 @@ public class APOC {
                 } else {
                     nodeDone = true;
                     label = nodeLabel;
-                    String l = label;
                     identifierLoop = "0";
                     identifierDevice = "000";
-                    opcTag = identifierArea+"."+"Panel_"+identifierNode+"("+identifierNode+").Node____(1)";
-                    System.out.println("* * * * * * * *"+fileLine);
+                    //opcTag = identifierArea+"."+"Panel_"+identifierNode+"("+identifierNode+").Node____(1)"; // Tag in format T01
+                    opcTag = area.replace(" ", "_")+"."+"Panel_"+identifierNode+"("+identifierNode+").Node____(1)"; // Tag in format Terminal_1
+
                 }
             }
             
@@ -269,7 +269,7 @@ public class APOC {
             if (identifierLoop != "X") {
                 // print the fileLine - testing
                 // System.out.println(parts[0] + ", " + parts[1] + ", " + parts[2] + ", " + parts[3] + ", " + parts[4] + ", " + parts[5] + ", ");
-                /*System.out.println("*** " + fileName + " *** " + uniqueIdentifier + ", "
+                System.out.println("*** " + fileName + " *** " + uniqueIdentifier + ", "
                         + area + ", "
                         + attribute + ", "
                         + type + ", "
@@ -277,16 +277,16 @@ public class APOC {
                         + opcInterfacePc + ", "
                         + opcServerName + ", "
                         + opcTag
-                );*/
+                );
                 // only output if element has a loop number
 
-                output.println(uniqueIdentifier + ","
-                        + area + ","
-                        + attribute + ","
-                        + type + ","
-                        + label + ","
-                        + opcInterfacePc + ","
-                        + opcServerName + ","
+                output.println(uniqueIdentifier + "	"
+                        + area + "	"
+                        + attribute + "	"
+                        + type + "	"
+                        + label + "	"
+                        + opcInterfacePc + "	"
+                        + opcServerName + "	"
                         + opcTag
                 );
             }
