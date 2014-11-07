@@ -55,6 +55,8 @@ public class APOC {
     String opcInterfacePc;
     String opcServerName;
     String opcTag;
+    String nodeLabel; // nodes get their label from a different place in txt files.
+    boolean nodeDone; // nodes sometimes appear twice, only want data once
     // uniqueIdentifier parts
     String identifierArea;
     String identifierNode;
@@ -127,11 +129,15 @@ public class APOC {
             if (fileName.contains(".txt")) {
                 // text files
                 area = "Unkown";
+                nodeLabel = "";
+                nodeDone = false;
                 readTxtFile(fileName);
                 output.flush();
             } else if (fileName.contains(".xml")) {
                 // xml files
                 area = "Unkown";
+                nodeLabel = "";
+                nodeDone = false;
                 readXmlFile(fileName);
                 output.flush();
             } else {
@@ -156,11 +162,15 @@ public class APOC {
             if (fileName.contains(".txt")) {
                 // text files
                 area = folderName;
+                nodeLabel = "";
+                nodeDone = false;
                 readTxtFile(fileName);
                 output.flush();
             } else if (fileName.contains(".xml")) {
                 // xml files
                 area = csvLookup("attribute_xml_area", folderName, 2);
+                nodeLabel = "";
+                nodeDone = false;
                 readXmlFile(fileName);
                 output.flush();
             } else {
@@ -216,9 +226,17 @@ public class APOC {
             
             // nodes always have loop and device as 0
             if (type.toLowerCase().contains("node")){
-                identifierLoop = "0";
-                identifierDevice = "000";
-                opcTag = identifierArea+"."+"Panel_"+identifierNode+"("+identifierNode+").Node____(1)";
+                if (nodeDone){
+                    return;
+                } else {
+                    nodeDone = true;
+                    label = nodeLabel;
+                    String l = label;
+                    identifierLoop = "0";
+                    identifierDevice = "000";
+                    opcTag = identifierArea+"."+"Panel_"+identifierNode+"("+identifierNode+").Node____(1)";
+                    System.out.println("* * * * * * * *"+fileLine);
+                }
             }
             
             if (parts[1].contains("(In)") || parts[1].contains("(Out)")) {
@@ -251,7 +269,7 @@ public class APOC {
             if (identifierLoop != "X") {
                 // print the fileLine - testing
                 // System.out.println(parts[0] + ", " + parts[1] + ", " + parts[2] + ", " + parts[3] + ", " + parts[4] + ", " + parts[5] + ", ");
-                System.out.println("*** " + fileName + " *** " + uniqueIdentifier + ", "
+                /*System.out.println("*** " + fileName + " *** " + uniqueIdentifier + ", "
                         + area + ", "
                         + attribute + ", "
                         + type + ", "
@@ -259,7 +277,7 @@ public class APOC {
                         + opcInterfacePc + ", "
                         + opcServerName + ", "
                         + opcTag
-                );
+                );*/
                 // only output if element has a loop number
 
                 output.println(uniqueIdentifier + ","
@@ -273,6 +291,13 @@ public class APOC {
                 );
             }
             resetVariables();
+        } else if (fileLine.contains("Node Label")){
+            parts = fileLine.split(":");
+            if (parts.length > 0){
+                nodeLabel = parts[1].trim();
+            } else {
+                nodeLabel = "";
+            }
         } else {
             System.out.println("*** " + parts.length + " *** " + fileLine);
         }
