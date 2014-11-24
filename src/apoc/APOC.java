@@ -47,6 +47,7 @@ public class APOC {
     String path; // static path
     String filepath; // location of input files
     // output column headers
+    String folderXML;
     String uniqueIdentifier;
     String area;
     String attribute;
@@ -118,7 +119,7 @@ public class APOC {
         // add headings to the .csv and .txt
         output.println("Unique Identifier	Area	Attribute	Type	Label	OPC Interface PC	OPC Server Name	OPC Tag"); // header of tab delimited file 
         output_evac_zone.println("filename,id,id_string,label,reception_point_name,site_entry_point_label"); // header of .csv
-        output_devices.println("Unique Identifier,Area,id_string,Attribute,Type,Label,evac_zone_id,evac_id_string,evac_label,evac_reception_point_name,evac_site_entry_point_label,channel_type,channel_type_string"); // header of .csv
+        output_devices.println("Unique Identifier,Area,OPC Tag,id_string,Attribute,Type,Label,evac_zone_id,evac_id_string,evac_label,evac_reception_point_name,evac_site_entry_point_label,channel_type,channel_type_string,tag1,tag2,tag3,tag4"); // header of .csv
 
         path = "C:\\APOC_Tool\\input\\"; // set the static file path
         filepath = path; // set current 
@@ -128,14 +129,15 @@ public class APOC {
         for (String fileName : fileNames) {
             if (fileName.contains(".txt")) {
                 // text files
-                area = "Unkown";
+                area = "Unknown";
                 nodeLabel = "";
                 nodeDone = false;
                 readTxtFile(fileName);
                 output.flush();
             } else if (fileName.contains(".xml")) {
                 // xml files
-                area = "Unkown";
+                area = "Unknown";
+                folderXML = "Unknown";
                 nodeLabel = "";
                 nodeDone = false;
                 readXmlFile(fileName);
@@ -169,6 +171,7 @@ public class APOC {
             } else if (fileName.contains(".xml")) {
                 // xml files
                 area = csvLookup("attribute_xml_area", folderName, 2);
+                folderXML = folderName;
                 nodeLabel = "";
                 nodeDone = false;
                 readXmlFile(fileName);
@@ -367,8 +370,8 @@ public class APOC {
             String device_identifierDevice = threeDigit(device.getAttribute("loop_position"));
             String device_identifierType = csvLookup("attribute_type", device_product_code, 3);
             String device_identifierChannel = "";
-
-            // make changes for special cases
+            
+                        // make changes for special cases
             if (element == "fire_loop_device") {
                 // no changes needed for fire loop
             } else if (element == "addressable_speaker") {
@@ -399,26 +402,37 @@ public class APOC {
             String evac_zone_id = device.getAttribute("evac_zone_id");
             // lookup evac_zone_id to return id_string, label, reception_point_name, site_entry_point_label
             String evac_zone_details = evacZoneLookup(fileName, evac_zone_id);
-
+            String[] evac_zone_details_arary = evac_zone_details.split("\\,"); // array of length 4
+            
+            String tag1 = device_identifierNode + " :: " + device_id_string; 
+            String tag2 = tag1 + " :: " + evac_zone_details_arary[1];
+            // tag 3 and 4 are recreated for each channel
+            String tag3 = tag1 + " :: " + device_attribute_type + " :: " + device_label; 
+            String tag4 = device_uniqueIdentifier + " :: " + device_id_string;
+            
             System.out.println("****** " + device_uniqueIdentifier + ", "
                     + area + ", "
+                    + folderXML + ", "
                     + device_id_string + ", "
                     + device_product_code + ", "
                     + device_attribute_type + ", "
                     + device_label + ", "
                     + evac_zone_id + ", "
-                    + evac_zone_details
+                    + evac_zone_details + ", "
                     + ", , " // channel type
+                    + tag1 + ", " + tag2 + ", " + tag3 + ", " + tag4
             );
             output_devices.println(device_uniqueIdentifier + ","
                     + area + ","
+                    + folderXML + ","
                     + device_id_string + ","
                     + device_product_code + ","
                     + device_attribute_type + ","
                     + device_label + ","
                     + evac_zone_id + ","
-                    + evac_zone_details
+                    + evac_zone_details + ","
                     + ",," // channel type
+                    + tag1 + "," + tag2 + "," + tag3 + "," + tag4
             );
 
 
@@ -447,8 +461,12 @@ public class APOC {
                     String channel_type = channel.getAttribute("channel_type");
                     String channel_type_string = ioName;
 
+                    tag3 = tag1 + " :: " + device_attribute_type + " :: " + device_label; 
+                    tag4 = device_uniqueIdentifier_channel + " :: " + device_id_string;
+            
                     System.out.println("** " + device_uniqueIdentifier_channel + ", "
                             + area + ", "
+                            + folderXML + ", "
                             + device_id_string + ", "
                             + device_product_code + ", "
                             + device_attribute_type + ", "
@@ -456,10 +474,12 @@ public class APOC {
                             + evac_zone_id + ", "
                             + evac_zone_details + ", "
                             + channel_type + ", "
-                            + channel_type_string
+                            + channel_type_string + ", "
+                            + tag1 + ", " + tag2 + ", " + tag3 + ", " + tag4
                     );
                     output_devices.println(device_uniqueIdentifier_channel + ", "
                             + area + ","
+                            + folderXML + ","
                             + device_id_string + ","
                             + device_product_code + ","
                             + device_attribute_type + ","
@@ -467,7 +487,8 @@ public class APOC {
                             + evac_zone_id + ","
                             + evac_zone_details + ","
                             + channel_type + ","
-                            + channel_type_string
+                            + channel_type_string + ","
+                            + tag1 + "," + tag2 + "," + tag3 + "," + tag4
                     );
                 }
                 channelCount--; // decrement count
