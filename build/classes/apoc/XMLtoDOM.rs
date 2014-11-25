@@ -1,2 +1,0 @@
-apoc.XMLtoDOM
-apoc.NullResolver
