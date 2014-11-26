@@ -365,48 +365,49 @@ public class APOC {
     
     /**
      * add devices from the given element in the xml file
-     * @param d
-     * @param fileName
-     * @param element 
+     * @param d is the file
+     * @param fileName is the name of the file
+     * @param element e.g. fire_loop_device, addressable_speaker, serial_device, microphone
      */
     public void getXMLDevices(Document d, String fileName, String element) {
-        NodeList deviceList = d.getElementsByTagName(element);
-        int deviceCount = deviceList.getLength(); // count how many
+        NodeList deviceList = d.getElementsByTagName(element); // get all of the devices of element type
+        int deviceCount = deviceList.getLength(); // count how many devices of the element type
 
-        while (deviceCount > 0) {
+        while (deviceCount > 0) { // look through each device
             d.getDocumentElement().normalize();
             Node deviceNode = deviceList.item(deviceCount - 1); // use the count to get position of node
-            Element device = (Element) deviceNode; // get node element
+            Element device = (Element) deviceNode; // get the device from the node
 
-            String device_id_string = device.getAttribute("id_string");
+            String device_id_string = device.getAttribute("id_string"); // get the id string
+            String device_product_code = device.getAttribute("product_code"); // get the device product code (output column header: Attribute)
+            String device_attribute_type = csvLookup("attribute_type", device_product_code, 2); // get attribute type by looking up the product code (output column header: Type)
+            String device_label = device.getAttribute("label"); // get the device label (output column header: Label)
 
-            String device_product_code = device.getAttribute("product_code");
-            String device_attribute_type = csvLookup("attribute_type", device_product_code, 2);
-            String device_label = device.getAttribute("label");
-
-            String device_identifierArea = csvLookup("unique_identifier_area", area, 2);
-            String device_identifierNode = "" + fileName.charAt(fileName.length() - 7) + fileName.charAt(fileName.length() - 6) + fileName.charAt(fileName.length() - 5);
-            String device_identifierLoop = device.getAttribute("loop_number");
-            String device_identifierDevice = threeDigit(device.getAttribute("loop_position"));
-            String device_identifierType = csvLookup("attribute_type", device_product_code, 3);
-            String device_identifierChannel = "";
+            // get parts for the identifier tag
+            String device_identifierArea = csvLookup("unique_identifier_area", area, 2); // get area identifier by looking up area
+            String device_identifierNode = "" + fileName.charAt(fileName.length() - 7) + fileName.charAt(fileName.length() - 6) + fileName.charAt(fileName.length() - 5); // get node identifier from the the file name - last 3 digits before .xml
+            String device_identifierLoop = device.getAttribute("loop_number"); // get loop number identifer 
+            String device_identifierDevice = threeDigit(device.getAttribute("loop_position")); // get device identifier (loop postion) - convert to 3 digits
+            String device_identifierType = csvLookup("attribute_type", device_product_code, 3); // get the type identifier by looking up the product code (Type)
+            String device_identifierChannel = ""; // by default there is no channel
             
-            if (device_product_code.length() == 0){
-                device_attribute_type = "";
-                String [] idSplit = device_id_string.split("_");
-                device_identifierType = idSplit[idSplit.length-1].substring(0, 3);
+            // make changes for special cases 
+            if (device_product_code.length() == 0){ // if the product code is empty
+                device_attribute_type = ""; // set the type to empty
+                String [] idSplit = device_id_string.split("_"); // split the id string by _
+                device_identifierType = idSplit[idSplit.length-1].substring(0, 3); // take the first 3 letters from the last part of the id string
             }
 
-            // make changes for special cases
-            if (folderXML.contains("300128")){ // LHRVM300128 has a mix of areas
-                String idStringNumber = (device_id_string.substring(0, 5));
-                area = (csvLookup("area_LHRVM300128", idStringNumber, 2)); // get area
-                device_identifierArea = csvLookup("unique_identifier_area", area, 2); // get area code
+            if (folderXML.contains("300128")){ // folder LHRVM300128 has a mix of areas
+                String idStringNumber = (device_id_string.substring(0, 5)); // get the first 5 numbers from the id string
+                area = (csvLookup("area_LHRVM300128", idStringNumber, 2)); // get area by looking up the id string first 5 numbers
+                device_identifierArea = csvLookup("unique_identifier_area", area, 2); // get area code by looking up area
             }
-            if (element == "fire_loop_device") {
+            
+            if (element == "fire_loop_device") { // if fire loop device
                 // no changes needed for fire loop
-            } else if (element == "addressable_speaker") {
-                // addressable_speakers identifierLoop to equal identifierLoop + 2
+            } else if (element == "addressable_speaker") { // if addressable speaker
+                // add 2 to the device loop
                 switch (device_identifierLoop) {
                     case "1":
                         device_identifierLoop = "3";
@@ -416,41 +417,34 @@ public class APOC {
                         break;
                     default:
                 }
-                device_identifierDevice = threeDigit(device.getAttribute("address"));
-            } else if (element == "microphone") {
-                // microphones identifierLoop to equal 5
-                device_identifierLoop = "5";
-                device_identifierDevice = "0" + intLetter(device.getAttribute("serial_port")) + device.getAttribute("address");
-                //device_identifierChannel = device.getAttribute("annunciation_input_channel");
-            } else if (element == "serial_device") {
+                device_identifierDevice = threeDigit(device.getAttribute("address")); // if device identifer is the 'address' attribute - make 3 digits
+            } else if (element == "microphone") { // microphone
+                device_identifierLoop = "5"; // loop identifer always equal to 5
+                device_identifierDevice = "0" + intLetter(device.getAttribute("serial_port")) + device.getAttribute("address"); // device made up of 0 & number conversion (A->1) of 'serial_port' & 'address'
+            } else if (element == "serial_device") { // if serial device
                 // serial_devices identifierLoop to equal 5
-                device_identifierLoop = "5";
-                device_identifierDevice = "0" + intLetter(device.getAttribute("port_id")) + device.getAttribute("address");                
+                device_identifierLoop = "5"; // loop identifer always equal to 5
+                device_identifierDevice = "0" + intLetter(device.getAttribute("port_id")) + device.getAttribute("address"); // device made up of 0 & number conversion (A->1) of 'port_id' & 'address'            
             }
             
             if (fileName.contains("_PA.xml")){ // if a PA xml file
-                device_identifierNode = "" + fileName.charAt(fileName.length() - 10) + fileName.charAt(fileName.length() - 9) + fileName.charAt(fileName.length() - 8);
-                
+                device_identifierNode = "" + fileName.charAt(fileName.length() - 10) + fileName.charAt(fileName.length() - 9) + fileName.charAt(fileName.length() - 8); // node made up of 3 digits in the file name before '_PA.xml'
             }
             
             // create identifier tag     
             String device_uniqueIdentifier = device_identifierArea + "-" + device_identifierNode + "-" + device_identifierLoop + "-" + device_identifierDevice + "-" + device_identifierType;
-            if (device_identifierChannel.length() != 0) {
-                device_uniqueIdentifier = device_uniqueIdentifier + "-" + device_identifierChannel;
-            }
 
             String evac_zone_id = device.getAttribute("evac_zone_id");
             // lookup evac_zone_id to return id_string, label, reception_point_name, site_entry_point_label
-            String evac_zone_details = evacZoneLookup(fileName, evac_zone_id);
-            String[] evac_zone_details_arary = evac_zone_details.split("\\,"); // array of length 4
+            String evac_zone_details = evacZoneLookup(fileName, evac_zone_id); // get the evac zone details by looking up the file name and evac id - this lookup file is created when the program is run and is in outputs foler
+            String[] evac_zone_details_array = evac_zone_details.split("\\,"); // split the array details in to individual parts - length 4
             
+            // creat 4 tags
             String tag1 = device_identifierNode + " :: " + device_id_string; 
-            String tag2 = tag1 + " :: " + evac_zone_details_arary[1];
-            // tag 3 and 4 are recreated for each channel
+            String tag2 = tag1 + " :: " + evac_zone_details_array[1];
+            // tag 3 and 4 are recreated/unique for each channel
             String tag3 = tag1 + " :: " + device_attribute_type + " :: " + device_label; 
             String tag4 = device_uniqueIdentifier + " :: " + device_id_string;
-            
-            
             
             System.out.println("****** " + device_uniqueIdentifier + ", "
                     + area + ", "
@@ -465,6 +459,7 @@ public class APOC {
                     + tag1 + ", " + tag2 + ", " + tag3 + ", " + tag4 + ", "
                     + fileName
             );
+            // add csv line to output
             output_devices.println(device_uniqueIdentifier + ","
                     + area + ","
                     + folderXML + ","
@@ -479,15 +474,13 @@ public class APOC {
                     + fileName
             );
 
+            NodeList channelList = device.getElementsByTagName("channel"); // get all the channels that this device has
+            int channelCount = channelList.getLength(); // count how many channels
 
-            NodeList channelList = device.getElementsByTagName("channel"); // get all elements
-            int channelCount = channelList.getLength(); // count how many
-            System.out.println(device_id_string + "  " + channelCount);
-
-            while (channelCount > 0) {
+            while (channelCount > 0) { // look through each channel
                 d.getDocumentElement().normalize();
-                Node channelNode = channelList.item(channelCount - 1); // use the count to get position of node
-                Element channel = (Element) channelNode; // get node element
+                Node channelNode = channelList.item(channelCount - 1); // use the count to get position of channel
+                Element channel = (Element) channelNode; // get the channel
 
                 // get element inside the channel that shows whether it is input or output
                 NodeList ioChannelList = channel.getElementsByTagName("*"); // get all elements
@@ -497,14 +490,16 @@ public class APOC {
                 Element ioChannel = (Element) ioChannelNode; // get node element
                 String ioName = ioChannel.getNodeName();
 
-                if (ioName.contains("input")) {
-                    device_identifierChannel = channel.getAttribute("channel_id");
+                if (ioName.contains("input")) { // only interested in input channels (not output)
+                    device_identifierChannel = channel.getAttribute("channel_id"); // get the channel id
+                    // recreate the identifier tag
                     String device_uniqueIdentifier_channel = device_identifierArea + "-" + device_identifierNode + "-" + device_identifierLoop + "-" + device_identifierDevice + "-INI-" + device_identifierChannel;
 
-                    device_label = channel.getAttribute("channel_label");
-                    String channel_type = channel.getAttribute("channel_type");
-                    String channel_type_string = ioName;
+                    device_label = channel.getAttribute("channel_label"); // get the channel label
+                    String channel_type = channel.getAttribute("channel_type"); // get the channel type
+                    String channel_type_string = ioName; // get the channel string
 
+                    // create tag 3 and 4
                     tag3 = tag1 + " :: " + device_attribute_type + " :: " + device_label; 
                     tag4 = device_uniqueIdentifier_channel + " :: " + device_id_string;
             
@@ -522,6 +517,7 @@ public class APOC {
                             + tag1 + ", " + tag2 + ", " + tag3 + ", " + tag4 + ", "
                             + fileName
                     );
+                    // add csv line to output
                     output_devices.println(device_uniqueIdentifier_channel + ","
                             + area + ","
                             + folderXML + ","
