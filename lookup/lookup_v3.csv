@@ -140,7 +140,7 @@ attribute_type,300930025,Voice Sounder with Strobe,SOS
 attribute_type,13421-43-DC,Wall Mounted Penton Heavy Duty Re-Entrant Horn [ 20watt ],
 unique_identifier_area,D’Albiac House,DAL,
 unique_identifier_area,D'Albiac House,DAL,
-unique_identifier_area,Terminal 5 Multi-Storey Car Park,CP5,
+unique_identifier_area,Multi-Storey Car Park Terminal 5,CP5,
 unique_identifier_area,Passenger Subways,PAX,
 unique_identifier_area,Terminal 1,T01,
 unique_identifier_area,Terminal 3,T03,
@@ -149,8 +149,8 @@ unique_identifier_area,Terminal 4,T04,
 unique_identifier_area,Terminal 5A,T5A,
 unique_identifier_area,Terminal 5B,T5B,
 unique_identifier_area,Terminal 5C,T5C,
-unique_identifier_area,Terminal 5 Track Transit System,TTS,
-unique_identifier_area,Terminal 5 Utilities,UTL,
+unique_identifier_area,Track Transit System Terminal 5,TTS,
+unique_identifier_area,Utilities System Terminal 5,UTL,
 unique_identifier_area,Western Interface Building,WIB,
 attribute_xml_area,LHRVM300110,Terminal 5A,<--unchecked area
 attribute_xml_area,LHRVM300112,Terminal 5A,<--unchecked area
@@ -162,15 +162,10 @@ attribute_xml_area,LHRVM300118,Terminal 5A,<--unchecked area
 attribute_xml_area,LHRVM300120,Terminal 5B,<--unchecked area
 attribute_xml_area,LHRVM300122,Terminal 5B,<--unchecked area
 attribute_xml_area,LHRVM300124,Terminal 5B,<--unchecked area
-attribute_xml_area,LHRVM300126,Terminal 5 Track Transit System,<--unkown area
-attribute_xml_area,"LHRVM300128 --> ""area_LHRVM300128""",Terminal 5 Multi-Storey Car Park,<--unchecked area
+attribute_xml_area,LHRVM300126,Track Transit System Terminal 5,<--unkown area
+attribute_xml_area,LHRVM300128,Multi-Storey Car Park Terminal 5,<--unchecked area
 attribute_xml_area,LHRVM300146,Terminal 5A,<--unchecked area
 attribute_xml_area,LHRVM300148,Terminal 5A,<--unchecked area
 attribute_xml_area,LHRVM300158,Terminal 5A,<--unchecked area
 attribute_xml_area,LHRVM300182,Terminal 5C,<--unchecked area
 attribute_xml_area,LHRVM300183,Terminal 5C,<--unchecked area
-area_LHRVM300128,15002,Terminal 5 Multi-Storey Car Park,
-area_LHRVM300128,15400,Terminal 5 Multi-Storey Car Park,
-area_LHRVM300128,15401,Terminal 5 Multi-Storey Car Park,
-area_LHRVM300128,15406,Terminal 5 Multi-Storey Car Park,
-area_LHRVM300128,15812,Terminal 5 Utilities,
