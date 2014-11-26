@@ -251,10 +251,13 @@ public class APOC {
                     switch (nameSplit[i]) {
                     case "Channel":
                         identifierChannel = nameSplit[i+1];
+                        break;
                     case "Device":
                         identifierDevice = threeDigit(nameSplit[i+1]);
+                        break;
                     case "Loop":
                         identifierLoop = nameSplit[i+1];
+                        break;
                     default:
                     }          
                 }
@@ -393,8 +396,13 @@ public class APOC {
                 String [] idSplit = device_id_string.split("_");
                 device_identifierType = idSplit[idSplit.length-1].substring(0, 3);
             }
-            
+
             // make changes for special cases
+            if (folderXML.contains("300128")){ // LHRVM300128 has a mix of areas
+                String idStringNumber = (device_id_string.substring(0, 5));
+                area = (csvLookup("area_LHRVM300128", idStringNumber, 2)); // get area
+                device_identifierArea = csvLookup("unique_identifier_area", area, 2); // get area code
+            }
             if (element == "fire_loop_device") {
                 // no changes needed for fire loop
             } else if (element == "addressable_speaker") {
@@ -402,8 +410,10 @@ public class APOC {
                 switch (device_identifierLoop) {
                     case "1":
                         device_identifierLoop = "3";
+                        break;
                     case "2":
                         device_identifierLoop = "4";
+                        break;
                     default:
                 }
                 device_identifierDevice = threeDigit(device.getAttribute("address"));
@@ -512,7 +522,7 @@ public class APOC {
                             + tag1 + ", " + tag2 + ", " + tag3 + ", " + tag4 + ", "
                             + fileName
                     );
-                    output_devices.println(device_uniqueIdentifier_channel + ", "
+                    output_devices.println(device_uniqueIdentifier_channel + ","
                             + area + ","
                             + folderXML + ","
                             + device_id_string + ","
